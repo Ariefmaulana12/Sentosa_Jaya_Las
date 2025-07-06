@@ -1,0 +1,2167 @@
+<?php
+// Landing page Bengkel Las Sentosa Jaya - Premium Version with Gallery
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sentosa Jaya - Bengkel Las & Aluminium Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-gold: #D4AF37;
+            --secondary-gold: #FFD700;
+            --dark-gold: #B8860B;
+            --premium-black: #0A0A0A;
+            --charcoal: #1A1A1A;
+            --silver: #C0C0C0;
+            --white: #FFFFFF;
+            --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #B8860B 100%);
+            --gradient-dark: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #2A2A2A 100%);
+            --shadow-gold: 0 10px 30px rgba(212, 175, 55, 0.3);
+            --shadow-premium: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--gradient-dark);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--charcoal);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-gold);
+            border-radius: 4px;
+        }
+
+        /* Premium Border Container */
+        .border-container {
+            min-height: 100vh;
+            border: 2px solid transparent;
+            background: linear-gradient(var(--premium-black), var(--charcoal)) padding-box,
+                        var(--gradient-gold) border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .border-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Premium Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 15px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: var(--shadow-premium);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-gold);
+            padding: 3px;
+            box-shadow: var(--shadow-gold);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 10px 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary-gold);
+        }
+
+        .cta-nav {
+            background: var(--gradient-gold);
+            color: var(--premium-black);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-gold);
+        }
+
+        .cta-nav:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-gold);
+            font-weight: 400;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient-gold);
+            color: var(--premium-black);
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-gold);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 15px 40px;
+            border: 2px solid var(--primary-gold);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gradient-gold);
+            color: var(--premium-black);
+            transform: translateY(-3px);
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 120px 50px;
+            background: var(--charcoal);
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-subtitle {
+            color: var(--secondary-gold);
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .section-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-premium);
+            border-color: var(--primary-gold);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 2rem;
+            color: var(--premium-black);
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .service-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .service-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        .service-features li {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-gold);
+            font-weight: bold;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 120px 50px;
+            background: var(--premium-black);
+            position: relative;
+        }
+
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--gradient-gold);
+            color: var(--premium-black);
+            border-color: var(--primary-gold);
+            transform: translateY(-2px);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-premium);
+            border-color: var(--primary-gold);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(10, 10, 10, 0.8) 100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .gallery-category {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .gallery-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        /* Modal Gallery */
+        .gallery-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-premium);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gradient-gold);
+            color: var(--premium-black);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--gradient-gold);
+            color: var(--premium-black);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-nav:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        .modal-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 40px 30px 30px;
+            color: var(--white);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .modal-category {
+            font-size: 1rem;
+            color: var(--secondary-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 120px 50px;
+            background: var(--premium-black);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary-gold);
+            display: block;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-premium);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 120px 50px;
+            background: var(--charcoal);
+        }
+
+        .contact-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--secondary-gold);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--premium-black);
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--secondary-gold);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            color: var(--white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--premium-black);
+            padding: 60px 50px 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--secondary-gold);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-gold);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--gradient-gold);
+            color: var(--premium-black);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .services-section,
+            .about-section,
+            .contact-section,
+            .gallery-section {
+                padding: 80px 20px;
+            }
+
+            .services-grid,
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading {
+                font-size: 2.5rem;
+            }
+
+            .gallery-filters {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .modal-content {
+                max-width: 95%;
+                max-height: 85%;
+            }
+
+            .modal-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .modal-prev {
+                left: 10px;
+            }
+
+            .modal-next {
+                right: 10px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Scroll Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--premium-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(212, 175, 55, 0.3);
+            border-top: 3px solid var(--primary-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Smooth Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--gradient-gold);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-gold);
+            border: none;
+            border-radius: 50%;
+            color: var(--premium-black);
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        /* WhatsApp Float Button Styles */
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.6); }
+            100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+        }
+        
+        .whatsapp-float a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Gallery Filter Animation */
+        .gallery-item {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 0.5s ease;
+        }
+
+        .gallery-item.hide {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+        }
+
+        /* Masonry Layout for Gallery */
+        .gallery-masonry {
+            column-count: 3;
+            column-gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-masonry .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 30px;
+            display: inline-block;
+            width: 100%;
+            aspect-ratio: auto;
+        }
+
+        @media (max-width: 1024px) {
+            .gallery-masonry {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-masonry {
+                column-count: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Premium Border Container -->
+    <div class="border-container">
+        <!-- Premium Navbar -->
+        <nav class="navbar" id="navbar">
+            <div class="logo">
+                <img src="logo-sj.png" alt="Logo Sentosa Jaya Las" class="logo-img">
+                <span class="logo-text">Sentosa Jaya</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Beranda</a></li>
+                <li><a href="#services" class="nav-link">Layanan</a></li>
+                <li><a href="#galeri" class="nav-link">Galeri</a></li>
+                <li><a href="#about" class="nav-link">Tentang</a></li>
+                <li><a href="#contact" class="nav-link">Kontak</a></li>
+            </ul>
+            <a href="#contact" class="cta-nav">
+                <i class="fas fa-phone"></i>
+                Hubungi Kami
+            </a>
+            <button class="mobile-menu-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero-section" id="home">
+            <div class="hero-content fade-in-up">
+                <p class="hero-subtitle">Premium Welding Services</p>
+                <h1 class="hero-title">Sentosa Jaya</h1>
+                <p class="hero-description">
+                    Bengkel Las & Aluminium Terpercaya Se-Jabodetabek<br>
+                    Layanan Cepat, Hasil Berkualitas Premium untuk Semua Kebutuhan Konstruksi Anda
+                </p>
+                <div class="hero-buttons">
+                    <a href="#services" class="btn-primary">
+                        <i class="fas fa-tools"></i>
+                        Lihat Layanan
+                    </a>
+                    <a href="#contact" class="btn-secondary">
+                        <i class="fas fa-phone"></i>
+                        Konsultasi Gratis
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="section-title scroll-animate">
+            <p class="section-subtitle">Layanan Kami</p>
+            <h2 class="section-heading">Solusi Konstruksi Premium</h2>
+            <p class="section-description">
+                Kami menyediakan layanan pengelasan dan aluminium berkualitas tinggi dengan teknologi modern dan tenaga ahli berpengalaman
+            </p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card scroll-animate">
+                <div class="service-icon">
+                    <i class="fas fa-hammer"></i>
+                </div>
+                <h3 class="service-title">Layanan Pengelasan Premium</h3>
+                <p class="service-description">
+                    Solusi pengelasan profesional untuk berbagai kebutuhan konstruksi dengan hasil berkualitas tinggi
+                </p>
+                <ul class="service-features">
+                    <li>Kanopi Besi & Baja Ringan</li>
+                    <li>Pagar & Teralis Artistik</li>
+                    <li>Tangga & Railing Modern</li>
+                    <li>Konstruksi Baja Custom</li>
+                    <li>Perbaikan & Modifikasi</li>
+                </ul>
+            </div>
+            <div class="service-card scroll-animate">
+                <div class="service-icon">
+                    <i class="fas fa-window-maximize"></i>
+                </div>
+                <h3 class="service-title">Layanan Aluminium Eksklusif</h3>
+                <p class="service-description">
+                    Pemasangan dan pembuatan produk aluminium berkualitas dengan desain modern dan elegan
+                </p>
+                <ul class="service-features">
+                    <li>Kusen Aluminium Premium</li>
+                    <li>Pintu & Jendela Modern</li>
+                    <li>Pintu Geser & Lipat</li>
+                    <li>Partisi Aluminium & Kaca</li>
+                    <li>Curtain Wall System</li>
+                </ul>
+            </div>
+            <div class="service-card scroll-animate">
+                <div class="service-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3 class="service-title">Layanan Khusus</h3>
+                <p class="service-description">
+                    Layanan tambahan untuk memenuhi kebutuhan spesifik proyek konstruksi Anda
+                </p>
+                <ul class="service-features">
+                    <li>Konsultasi Desain Gratis</li>
+                    <li>Survey & Estimasi</li>
+                    <li>Maintenance & Service</li>
+                    <li>Garansi Produk</li>
+                    <li>After Sales Support</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="galeri">
+        <div class="section-title scroll-animate">
+            <p class="section-subtitle">Portofolio Karya</p>
+            <h2 class="section-heading">Galeri Saya</h2>
+            <p class="section-description">
+                Koleksi hasil karya terbaik kami yang menunjukkan kualitas dan keahlian dalam bidang pengelasan dan aluminium
+            </p>
+        </div>
+
+        <!-- Gallery Filters -->
+        <div class="gallery-filters scroll-animate">
+            <button class="filter-btn active" data-filter="all">Semua Karya</button>
+            <button class="filter-btn" data-filter="kanopi">Kanopi</button>
+            <button class="filter-btn" data-filter="pagar">Pagar & Teralis</button>
+            <button class="filter-btn" data-filter="aluminium">Aluminium</button>
+            <button class="filter-btn" data-filter="tangga">Tangga & Railing</button>
+            <button class="filter-btn" data-filter="custom">Custom Work</button>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid scroll-animate" id="galleryGrid">
+            <!-- Kanopi Items -->
+            <div class="gallery-item" data-category="kanopi" data-title="Kanopi Baja Ringan Modern" data-description="Kanopi baja ringan dengan desain minimalis untuk rumah modern">
+                <img src="kanopi2.jpg" alt="Kanopi Baja Ringan Modern">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon"><i class="fas fa-home"></i></div>
+                    <h3 class="gallery-title">Kanopi Baja Ringan Modern</h3>
+                    <p class="gallery-category">Kanopi</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="kanopi" data-title="Kanopi Carport Mewah" data-description="Kanopi carport dengan struktur baja kokoh dan atap polycarbonate">
+                <img src="kanopi.jpg" alt="Kanopi Carport Mewah">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon"><i class="fas fa-car"></i></div>
+                    <h3 class="gallery-title">Kanopi Carport Mewah</h3>
+                    <p class="gallery-category">Kanopi</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="kanopi" data-title="Kanopi Teras Elegan" data-description="Kanopi teras dengan kombinasi besi dan kaca yang elegan">
+                <img src="kanopi1.jpeg" alt="Kanopi Teras Elegan">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon"><i class="fas fa-umbrella"></i></div>
+                    <h3 class="gallery-title">Kanopi Teras Elegan</h3>
+                    <p class="gallery-category">Kanopi</p>
+                </div>
+            </div>
+
+            <!-- Pagar & Teralis Items -->
+            <div class="gallery-item" data-category="pagar" data-title="Pagar Minimalis Modern" data-description="Pagar besi dengan desain minimalis untuk rumah kontemporer">
+                <img src="pagar2.jpg" alt="Pagar Minimalis Modern">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="gallery-title">Pagar Minimalis Modern</h3>
+                    <p class="gallery-category">Pagar & Teralis</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="pagar" data-title="Teralis Jendela Artistik" data-description="Teralis jendela dengan motif artistik yang indah dan aman">
+                <img src="tralis1.jpg" alt="Teralis Jendela Artistik">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon"><i class="fas fa-window-maximize"></i></div>
+                    <h3 class="gallery-title">Teralis Jendela Artistik</h3>
+                    <p class="gallery-category">Pagar & Teralis</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="pagar" data-title="Pagar Klasik Mewah" data-description="Pagar besi tempa dengan ornamen klasik yang mewah">
+                <img src="pagar3.jpg" alt="Pagar Klasik Mewah">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon"><i class="fas fa-crown"></i></div>
+                    <h3 class="gallery-title">Pagar Klasik Mewah</h3>
+                    <p class="gallery-category">Pagar & Teralis</p>
+                </div>
+            </div>
+
+            <!-- Aluminium Items -->
+            <div class="gallery-item" data-category="aluminium" data-title="Kusen Aluminium Premium" data-description="Kusen aluminium dengan finishing premium untuk jendela modern">
+                <img src="almunium-set1.jpg" alt="Kusen Aluminium Premium">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon"><i class="fas fa-square"></i></div>
+                    <h3 class="gallery-title">Kusen Aluminium Premium</h3>
+                    <p class="gallery-category">Aluminium</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="aluminium" data-title="Pintu Geser Aluminium" data-description="Pintu geser aluminium dengan sistem rel yang halus">
+                <img src="almunium1.jpg" alt="Pintu Geser Aluminium">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon"><i class="fas fa-door-open"></i></div>
+                    <h3 class="gallery-title">Pintu Geser Aluminium</h3>
+                    <p class="gallery-category">Aluminium</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="aluminium" data-title="Partisi Kaca Aluminium" data-description="Partisi ruangan dengan frame aluminium dan kaca tempered">
+                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=500&h=400&fit=crop" alt="Partisi Kaca Aluminium">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon"><i class="fas fa-th-large"></i></div>
+                    <h3 class="gallery-title">Partisi Kaca Aluminium</h3>
+                    <p class="gallery-category">Aluminium</p>
+                </div>
+            </div>
+
+            <!-- Tangga & Railing Items -->
+            <div class="gallery-item" data-category="tangga" data-title="Tangga Besi Industrial" data-description="Tangga besi dengan desain industrial yang kokoh dan stylish">
+                <img src="railing.webp" alt="Tangga Besi Industrial">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon"><i class="fas fa-stairs"></i></div>
+                    <h3 class="gallery-title">Tangga Besi Industrial</h3>
+                    <p class="gallery-category">Tangga & Railing</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="tangga" data-title="Railing Balkon Modern" data-description="Railing balkon dengan desain modern dan safety glass">
+                <img src="railing2.jpeg" alt="Railing Balkon Modern">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon"><i class="fas fa-grip-lines"></i></div>
+                    <h3 class="gallery-title">Railing Balkon Modern</h3>
+                    <p class="gallery-category">Tangga & Railing</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="tangga" data-title="Tangga Spiral Mewah" data-description="Tangga spiral dengan ornamen besi tempa yang mewah">
+                <img src="tangga-putar1.jpg" alt="Tangga Spiral Mewah">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon"><i class="fas fa-sync-alt"></i></div>
+                    <h3 class="gallery-title">Tangga Spiral Mewah</h3>
+                    <p class="gallery-category">Tangga & Railing</p>
+                </div>
+            </div>
+
+            <!-- Custom Work Items -->
+            <div class="gallery-item" data-category="custom" data-title="Gazebo Besi Artistik" data-description="Gazebo besi dengan ornamen artistik untuk taman">
+                <img src="pabrik.webp" alt="Gazebo Besi Artistik">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon"><i class="fas fa-chess-rook"></i></div>
+                    <h3 class="gallery-title">Gazebo Besi Artistik</h3>
+                    <p class="gallery-category">Custom Work</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="custom" data-title="Mezzanine Steel Structure" data-description="Struktur mezzanine baja untuk ruang tambahan">
+                <img src="proyek.jpeg" alt="Mezzanine Steel Structure">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon"><i class="fas fa-layer-group"></i></div>
+                    <h3 class="gallery-title">Mezzanine Steel Structure</h3>
+                    <p class="gallery-category">Custom Work</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="custom" data-title="Shelter Bus Modern" data-description="Shelter bus dengan desain modern dan tahan cuaca">
+                <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=500&h=400&fit=crop" alt="Shelter Bus Modern">
+                <div class="gallery-overlay">
+                    <div class="gallery-icon"><i class="fas fa-bus"></i></div>
+                    <h3 class="gallery-title">Shelter Bus Modern</h3>
+                    <p class="gallery-category">Custom Work</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Modal -->
+    <div class="gallery-modal" id="galleryModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <button class="modal-nav modal-prev" id="modalPrev">&#8249;</button>
+            <button class="modal-nav modal-next" id="modalNext">&#8250;</button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <div class="modal-info">
+                <h3 class="modal-title" id="modalTitle"></h3>
+                <p class="modal-category" id="modalCategory"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="about-content">
+            <div class="about-text scroll-animate">
+                <h2>Mengapa Memilih Sentosa Jaya?</h2>
+                <p>
+                    Dengan pengalaman lebih dari 15 tahun di industri pengelasan dan aluminium, Sentosa Jaya telah menjadi pilihan utama untuk berbagai proyek konstruksi di Jabodetabek.
+                </p>
+                <p>
+                    Kami menggunakan teknologi terdepan dan material berkualitas tinggi untuk memastikan setiap hasil kerja memenuhi standar internasional. Tim ahli kami terdiri dari welder bersertifikat dan teknisi berpengalaman.
+                </p>
+                <p>
+                    Kepuasan pelanggan adalah prioritas utama kami. Setiap proyek ditangani dengan detail dan presisi tinggi untuk menghasilkan karya yang tidak hanya fungsional tetapi juga estetis.
+                </p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Proyek Selesai</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Tahun Pengalaman</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Kepuasan Klien</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Support Service</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image scroll-animate">
+                <img src="paklas.jpeg" alt="Tim Sentosa Jaya">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="section-title scroll-animate">
+            <p class="section-subtitle">Hubungi Kami</p>
+            <h2 class="section-heading">Konsultasi Gratis</h2>
+            <p class="section-description">
+                Siap membantu mewujudkan proyek konstruksi impian Anda dengan layanan terbaik dan harga kompetitif
+            </p>
+        </div>
+        <div class="contact-content">
+            <div class="contact-info scroll-animate">
+                <h3>Informasi Kontak</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h4>Alamat Workshop</h4>
+                        <p>Jl. Kubang Kp.Lubang Buaya Ds.Cijengkol Kec.Setu <br>Bekasi Jawa Barat 17320</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <h4>Telepon & WhatsApp</h4>
+                        <p>+62 83-804-172-710<br>+62 21-8765-4321</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>info@sentosajayalas.com<br>order@sentosajayalas.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <h4>Jam Operasional</h4>
+                        <p>Senin - Sabtu: 08.00 - 17.00<br>Minggu: 08.00 - 15.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form scroll-animate">
+                <h3 style="color: var(--secondary-gold); margin-bottom: 30px; text-align: center;">Dapatkan Penawaran Terbaik</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Nomor Telepon</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Jenis Layanan</label>
+                        <select id="service" name="service" required>
+                            <option value="">Pilih Layanan</option>
+                            <option value="pengelasan">Layanan Pengelasan</option>
+                            <option value="aluminium">Layanan Aluminium</option>
+                            <option value="konsultasi">Konsultasi Desain</option>
+                            <option value="maintenance">Maintenance & Service</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Deskripsi Proyek</label>
+                        <textarea id="message" name="message" placeholder="Ceritakan detail proyek Anda..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-paper-plane"></i>
+                        Kirim Pesan
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Sentosa Jaya Las</h3>
+                <p>Bengkel las dan aluminium terpercaya dengan layanan premium untuk semua kebutuhan konstruksi Anda. Kualitas terjamin, harga kompetitif.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Layanan Kami</h3>
+                <p><a href="#services">Pengelasan Premium</a></p>
+                <p><a href="#services">Aluminium Eksklusif</a></p>
+                <p><a href="#services">Konsultasi Desain</a></p>
+                <p><a href="#services">Maintenance Service</a></p>
+                <p><a href="#services">Custom Fabrication</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Area Layanan</h3>
+                <p>Jakarta Pusat & Timur</p>
+                <p>Jakarta Barat & Selatan</p>
+                <p>Jakarta Utara</p>
+                <p>Bekasi & Depok</p>
+                <p>Tangerang & Bogor</p>
+            </div>
+            <div class="footer-section">
+                <h3>Kontak Cepat</h3>
+                <p><i class="fas fa-phone" style="color: var(--secondary-gold); margin-right: 8px;"></i> +62 83-804-172-710</p>
+                <p><i class="fas fa-envelope" style="color: var(--secondary-gold); margin-right: 8px;"></i> info@sentosajayalas.com</p>
+                <p><i class="fas fa-map-marker-alt" style="color: var(--secondary-gold); margin-right: 8px;"></i> Kabupaten Bekasi</p>
+                <p><i class="fas fa-clock" style="color: var(--secondary-gold); margin-right: 8px;"></i> 08.00 - 17.00 WIB</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Sentosa Jaya Las. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float" style="position: fixed; bottom: 30px; right: 30px; z-index: 1000;">
+        <a href="https://wa.me/6283804172710?text=Halo%20Sentosa%20Jaya,%20saya%20ingin%20konsultasi%20tentang%20layanan%20las%20dan%20aluminium" 
+           target="_blank" 
+           style="display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: #25D366; border-radius: 50%; color: white; font-size: 1.5rem; text-decoration: none; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); transition: all 0.3s ease; animation: pulse 2s infinite;">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Global Variables
+        let currentImageIndex = 0;
+        let galleryImages = [];
+        let filteredImages = [];
+
+        // Loading Animation
+        window.addEventListener('load', function() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            setTimeout(() => {
+                loadingOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const scrollProgress = document.getElementById('scrollProgress');
+            const backToTop = document.getElementById('backToTop');
+            
+            // Navbar background change
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            // Scroll progress bar
+            const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            scrollProgress.style.width = scrollPercentage + '%';
+            
+            // Back to top button
+            if (window.scrollY > 500) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // Back to Top Functionality
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Mobile Menu Toggle
+        document.getElementById('mobileToggle').addEventListener('click', function() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+            
+            const icon = this.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Close mobile menu if open
+                    const navMenu = document.getElementById('navMenu');
+                    const mobileToggle = document.getElementById('mobileToggle');
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        mobileToggle.querySelector('i').classList.remove('fa-times');
+                        mobileToggle.querySelector('i').classList.add('fa-bars');
+                    }
+                }
+            });
+        });
+
+        // Active Navigation Link
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Gallery Filter Functionality
+        function initializeGallery() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            // Store all gallery items
+            galleryImages = Array.from(galleryItems);
+            filteredImages = [...galleryImages];
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter gallery items
+                    filterGallery(filter);
+                });
+            });
+            
+            // Initialize gallery modal
+            initializeGalleryModal();
+        }
+
+        function filterGallery(filter) {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            galleryItems.forEach((item, index) => {
+                const category = item.getAttribute('data-category');
+                
+                if (filter === 'all' || category === filter) {
+                    item.classList.remove('hide');
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1)';
+                    }, index * 50);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        item.classList.add('hide');
+                    }, 300);
+                }
+            });
+            
+            // Update filtered images array for modal navigation
+            if (filter === 'all') {
+                filteredImages = [...galleryImages];
+            } else {
+                filteredImages = galleryImages.filter(item => 
+                    item.getAttribute('data-category') === filter
+                );
+            }
+        }
+
+        // Gallery Modal Functionality
+        function initializeGalleryModal() {
+            const modal = document.getElementById('galleryModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalCategory = document.getElementById('modalCategory');
+            const modalClose = document.getElementById('modalClose');
+            const modalPrev = document.getElementById('modalPrev');
+            const modalNext = document.getElementById('modalNext');
+            
+            // Open modal when gallery item is clicked
+            document.querySelectorAll('.gallery-item').forEach((item, index) => {
+                item.addEventListener('click', function() {
+                    const imgSrc = this.querySelector('img').src;
+                    const title = this.getAttribute('data-title');
+                    const category = this.getAttribute('data-category');
+                    
+                    // Find current index in filtered images
+                    currentImageIndex = filteredImages.findIndex(img => 
+                        img.querySelector('img').src === imgSrc
+                    );
+                    
+                    openModal(imgSrc, title, category);
+                });
+            });
+            
+            // Close modal
+            modalClose.addEventListener('click', closeModal);
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Navigation
+            modalPrev.addEventListener('click', showPrevImage);
+            modalNext.addEventListener('click', showNextImage);
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (modal.classList.contains('active')) {
+                    if (e.key === 'Escape') closeModal();
+                    if (e.key === 'ArrowLeft') showPrevImage();
+                    if (e.key === 'ArrowRight') showNextImage();
+                }
+            });
+        }
+
+        function openModal(imgSrc, title, category) {
+            const modal = document.getElementById('galleryModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalCategory = document.getElementById('modalCategory');
+            
+            modalImage.src = imgSrc;
+            modalTitle.textContent = title;
+            modalCategory.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('galleryModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function showPrevImage() {
+            currentImageIndex = (currentImageIndex - 1 + filteredImages.length) % filteredImages.length;
+            updateModalImage();
+        }
+
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex + 1) % filteredImages.length;
+            updateModalImage();
+        }
+
+        function updateModalImage() {
+            const currentItem = filteredImages[currentImageIndex];
+            const imgSrc = currentItem.querySelector('img').src;
+            const title = currentItem.getAttribute('data-title');
+            const category = currentItem.getAttribute('data-category');
+            
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalCategory = document.getElementById('modalCategory');
+            
+            // Fade effect
+            modalImage.style.opacity = '0';
+            setTimeout(() => {
+                modalImage.src = imgSrc;
+                modalTitle.textContent = title;
+                modalCategory.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+                modalImage.style.opacity = '1';
+            }, 150);
+        }
+
+        // Scroll Animation Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Contact Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const phone = formData.get('phone');
+            const email = formData.get('email');
+            const service = formData.get('service');
+            const message = formData.get('message');
+            
+            // Create WhatsApp message
+            const whatsappMessage = `Halo Sentosa Jaya Las!%0A%0A` +
+                `Nama: ${name}%0A` +
+                `Telepon: ${phone}%0A` +
+                `Email: ${email}%0A` +
+                `Layanan: ${service}%0A` +
+                `Pesan: ${message}%0A%0A` +
+                `Mohon informasi lebih lanjut. Terima kasih!`;
+            
+            // Open WhatsApp
+            window.open(`https://wa.me/6283804172710?text=${whatsappMessage}`, '_blank');
+            
+            // Reset form
+            this.reset();
+            
+            // Show success message
+            showNotification('Terima kasih! Pesan Anda akan diteruskan ke WhatsApp.', 'success');
+        });
+
+        // Notification System
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            // Add styles
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--gradient-gold)' : 'var(--charcoal)'};
+                color: ${type === 'success' ? 'var(--premium-black)' : 'var(--white)'};
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: var(--shadow-premium);
+                z-index: 10001;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: all 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Hide notification
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Parallax Effect for Hero Section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero-section');
+            const speed = scrolled * 0.5;
+            
+            if (parallax) {
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+        });
+
+        // Number Counter Animation
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current) + (target >= 100 ? '+' : '');
+            }, 20);
+        }
+
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const target = parseInt(stat.textContent);
+                        if (!isNaN(target)) {
+                            animateCounter(stat, target);
+                        }
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.stats-grid');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Typing Effect for Hero Title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.textContent = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect when page loads
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const heroTitle = document.querySelector('.hero-title');
+                if (heroTitle) {
+                    const originalText = heroTitle.textContent;
+                    typeWriter(heroTitle, originalText, 150);
+                }
+            }, 1500);
+        });
+
+        // Service Card Hover Effect
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) rotateY(5deg)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) rotateY(0)';
+            });
+        });
+
+        // Gallery Item Hover Effect
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Smooth reveal animation for elements
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.scroll-animate');
+            
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('animate');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize gallery
+            initializeGallery();
+            
+            // Add stagger delay to service cards
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach((card, index) => {
+                card.style.transitionDelay = `${index * 0.2}s`;
+            });
+            
+            // Add stagger delay to contact items
+            const contactItems = document.querySelectorAll('.contact-item');
+            contactItems.forEach((item, index) => {
+                item.style.transitionDelay = `${index * 0.1}s`;
+            });
+            
+            // Add stagger delay to gallery items
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach((item, index) => {
+                item.style.transitionDelay = `${index * 0.05}s`;
+            });
+        });
+
+        // Lazy Loading for Images
+        function lazyLoadImages() {
+            const images = document.querySelectorAll('img[data-src]');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => imageObserver.observe(img));
+        }
+
+        // Initialize lazy loading
+        lazyLoadImages();
+
+        // Preload critical images
+        function preloadImages() {
+            const criticalImages = [
+                'https://i.ibb.co/6b6Qw8B/kanopi-besi.jpg',
+                'https://i.ibb.co/3r8Qw8B/kanopi-aluminium.jpg'
+            ];
+            
+            criticalImages.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        }
+
+        // Call preload on page load
+        window.addEventListener('load', preloadImages);
+
+        // Performance optimization: Debounce scroll events
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Apply debounce to scroll events
+        const debouncedScrollHandler = debounce(function() {
+            revealOnScroll();
+        }, 10);
+
+        window.addEventListener('scroll', debouncedScrollHandler);
+
+        // Add smooth transitions to all interactive elements
+        document.querySelectorAll('button, a, .gallery-item, .service-card, .contact-item').forEach(element => {
+            element.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        });
+
+        // Add focus styles for accessibility
+        document.querySelectorAll('button, a, input, textarea, select').forEach(element => {
+            element.addEventListener('focus', function() {
+                this.style.outline = '2px solid var(--secondary-gold)';
+                this.style.outlineOffset = '2px';
+            });
+            
+            element.addEventListener('blur', function() {
+                this.style.outline = 'none';
+            });
+        });
+
+        // Console welcome message
+        console.log(`
+        %c🔥 Sentosa Jaya Las - Premium Website 🔥
+        %cDeveloped with ❤️ for Premium Quality
+        %cContact: +62 83-804-172-710
+        `, 
+        'color: #D4AF37; font-size: 16px; font-weight: bold;',
+        'color: #FFD700; font-size: 12px;',
+        'color: #B8860B; font-size: 10px;'
+        );
+    </script>
+</body>
+</html>
